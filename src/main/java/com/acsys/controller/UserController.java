@@ -14,6 +14,7 @@ import com.acsys.payload.WebResponse;
 import com.acsys.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 @RestController
@@ -32,8 +33,8 @@ public class UserController {
     // public ResponseEntity<UserResponse> register(@RequestBody RegisterUserRequest request){
     //     return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(request));
     // }
-    public WebResponse<UserResponse> register(@RequestBody RegisterUserRequest request){
-        UserResponse userResponse = userService.register(request);
+    public WebResponse<UserResponse> register(@RequestBody RegisterUserRequest request, @RequestHeader("X-API-TOKEN") String token){
+        UserResponse userResponse = userService.register(request, token);
         // WebResponse<UserResponse> response = new WebResponse<UserResponse>();
         // response.setData(userResponse);
         // response.setError(null);
@@ -52,5 +53,15 @@ public class UserController {
         LoginResponse response = userService.login(request);
         return WebResponse.<LoginResponse>builder().data(response).error(null).build();
     }
+
+    @PostMapping(
+        path = "/api/logout"
+       )
+       public WebResponse<String> logout(@RequestHeader("X-API-TOKEN") String token){
+            userService.logout(token);
+
+            return WebResponse.<String>builder().data("Logout Success").error(null).build();
+       }
+
    
 }
