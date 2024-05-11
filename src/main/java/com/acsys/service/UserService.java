@@ -46,9 +46,9 @@ public class UserService {
         if (constraintViolations.size() > 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ivalid request");
         }
-
-        List<User> allUsers = userRepository.findAll();
-        if (!allUsers.isEmpty()) {
+        User allAdmin = userRepository.findFirstByRole("admin").orElse(null);
+        // List<User> allUsers = userRepository.findAll();
+        if (allAdmin != null) {
             User admin = userRepository.findFirstByToken(token)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "request rejected"));
 
