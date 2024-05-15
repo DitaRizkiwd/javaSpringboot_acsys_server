@@ -28,4 +28,8 @@ public class RegisterUserRequest {
     @Size(max=100)
     private String role;
 
+    @NotBlank
+    @Size(max = 100)
+    private String status;
+
 }

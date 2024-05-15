@@ -13,6 +13,6 @@ import lombok.NoArgsConstructor;
 public class WebResponse<T> {
     private T data;
 
-    private T error;
+    private String error;
 
 }

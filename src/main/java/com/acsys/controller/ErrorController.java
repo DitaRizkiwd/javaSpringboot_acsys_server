@@ -18,8 +18,6 @@ public class ErrorController {
         // return ResponseEntity.status(exception.getStatusCode().)
         return ResponseEntity
             .status(exception.getStatusCode())
-            .body(WebResponse.<String>builder()
-            .data(null)
-            .error(exception.getReason()).build());
+            .body(WebResponse.<String>builder().data(null).error(exception.getReason()).build());
     }
 }

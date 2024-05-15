@@ -16,13 +16,29 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
+    @UuidGenerator
+    private String id
+
     private String username;
+
     private String password;
-    private String token;
-    private String name;
+
     private String role;
+
+    private String token;
+
+    private String status;
     
     @Column(name = "token_expired_at")
     private Long tokenExpiredAt;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Instant createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Instant updateAt;
 }
